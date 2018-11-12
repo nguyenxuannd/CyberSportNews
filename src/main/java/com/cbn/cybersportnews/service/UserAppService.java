@@ -1,6 +1,7 @@
 package com.cbn.cybersportnews.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,27 +22,48 @@ public class UserAppService implements UserAppServiceInterface{
 	}
 
 	@Override
-	public UserApp getUserApp(Integer id) {
+	public Optional<UserApp> getUserApp(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		return userAppInterface.findById(id);
 	}
 
 	@Override
 	public Boolean insertUserApp(UserApp userApp) {
 		// TODO Auto-generated method stub
-		return null;
+	UserApp i=	userAppInterface.save(userApp);
+	return (i.equals(userApp)?true:false);
 	}
 
 	@Override
 	public Boolean updateUserApp(UserApp userApp) {
-		// TODO Auto-generated method stub
-		return null;
+		UserApp i=	userAppInterface.save(userApp);
+		return (i.equals(userApp)?true:false);
 	}
 
 	@Override
-	public Boolean deleteUserApp(UserApp userApp) {
+	public void deleteUserApp(UserApp userApp) {
+		userAppInterface.delete(userApp);
+	
+	}
+
+	@Override
+	public Boolean existUser(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		return userAppInterface.existsById(id);
+	}
+
+	@Override
+	public Boolean login(UserApp userApp) {
+		if(existUser(userApp.getId())) {
+			Optional<UserApp> userAuthen=getUserApp(userApp.getId());
+			if(userApp.getPassWord().equals(userAuthen.get().getPassWord())) {
+				return true;
+			}else {
+				return false;
+			}
+		}else {
+		return false;
+		}
 	}
 
 	
