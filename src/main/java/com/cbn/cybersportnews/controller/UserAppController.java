@@ -28,9 +28,9 @@ public class UserAppController {
 		return userAppServiceInterface.getAllUserApp();
 	}
 	
-	@RequestMapping(value="/user", method=RequestMethod.GET)
-	public Optional<UserApp> viewUser() {
-		return userAppServiceInterface.getUserApp(1);
+	@RequestMapping(value="/user", method=RequestMethod.POST)
+	public Optional<UserApp> viewUser(@RequestBody UserApp id) {
+		return userAppServiceInterface.getUserApp(id);
 	}
 	
 	@PostMapping(value="/insert")
@@ -43,5 +43,15 @@ public class UserAppController {
 	public Boolean updateUser(@RequestBody UserApp userApp) {
 		userAppServiceInterface.updateUserApp(userApp);
 		return true;
+	}
+	
+	@PostMapping("/login")
+	public Boolean loginUser(@RequestBody UserApp uApp) {
+		System.out.println("cos nul id ko: "+uApp.getId());
+		if(userAppServiceInterface.login(uApp)) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 }

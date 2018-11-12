@@ -22,9 +22,9 @@ public class UserAppService implements UserAppServiceInterface{
 	}
 
 	@Override
-	public Optional<UserApp> getUserApp(Integer id) {
+	public Optional<UserApp> getUserApp(UserApp id){
 		// TODO Auto-generated method stub
-		return userAppInterface.findById(id);
+		return userAppInterface.findById(id.getId());
 	}
 
 	@Override
@@ -49,13 +49,18 @@ public class UserAppService implements UserAppServiceInterface{
 	@Override
 	public Boolean existUser(Integer id) {
 		// TODO Auto-generated method stub
+		if(id.equals(null)) {
+			
+			return false;
+		}else
 		return userAppInterface.existsById(id);
 	}
 
 	@Override
 	public Boolean login(UserApp userApp) {
 		if(existUser(userApp.getId())) {
-			Optional<UserApp> userAuthen=getUserApp(userApp.getId());
+			Optional<UserApp> userAuthen=getUserApp(userApp);
+			System.out.println("id null"+userApp.getPassWord());
 			if(userApp.getPassWord().equals(userAuthen.get().getPassWord())) {
 				return true;
 			}else {
