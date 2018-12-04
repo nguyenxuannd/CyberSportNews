@@ -14,4 +14,6 @@ public Boolean updateUserApp(UserApp userApp);
 public void deleteUserApp(UserApp userApp);
 public Boolean existUser(Integer id);
 public Boolean login(UserApp userApp);
+
+public UserApp getTestUserApp(UserApp id);
 }

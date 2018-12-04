@@ -1,11 +1,23 @@
 package com.cbn.cybersportnews.Entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="userapp")
@@ -25,7 +37,11 @@ public class UserApp {
 	private String nickName;
 	private String gender;
 	private String picture;
-
+	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinTable(name="userapp_coupons",joinColumns=@JoinColumn(name="userapp_id"),inverseJoinColumns=@JoinColumn(name="coupons_id"))
+	
+	private List<Coupons> listCoupons = new ArrayList<>();
+	
 	public Integer getId() {
 		return id;
 	}
@@ -97,5 +113,16 @@ public class UserApp {
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
+
+	
+	public List<Coupons> getListCoupons() {
+		return listCoupons;
+	}
+
+	public void setListCoupons(List<Coupons> listCoupons) {
+		this.listCoupons = listCoupons;
+	}
+	
+	
 
 }

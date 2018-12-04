@@ -1,5 +1,8 @@
 package com.cbn.cybersportnews;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,7 +23,7 @@ public class CyberSportNewsApplication  {
 	/*@Override
 	public void run(String... args) throws Exception {
 		UserApp u=new UserApp();
-		u.setId(8);
+		u.setId(1);
 		u.setFirtName("Manly");
 		u.setLastName("Lopbetoo");
 		u.setEmail("linkdan@yahoo.com");
@@ -35,5 +38,8 @@ public class CyberSportNewsApplication  {
 		}else {
 		System.out.println("---------------: not");
 		}
+		Optional<UserApp> us=userAppServiceInterface.getUserApp(u);
+		
+		System.out.println(us.get().getListCoupons().size());
 	}*/
 }

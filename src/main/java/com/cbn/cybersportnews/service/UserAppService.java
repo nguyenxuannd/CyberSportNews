@@ -3,6 +3,8 @@ package com.cbn.cybersportnews.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +24,9 @@ public class UserAppService implements UserAppServiceInterface{
 	}
 
 	@Override
+	@Transactional
 	public Optional<UserApp> getUserApp(UserApp id){
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 
 		return userAppInterface.findById(id.getId());
 	}
 
@@ -69,6 +72,12 @@ public class UserAppService implements UserAppServiceInterface{
 		}else {
 		return false;
 		}
+	}
+
+	@Override
+	public UserApp getTestUserApp(UserApp id) {
+		// TODO Auto-generated method stub
+		return userAppInterface.findUserAppById(id.getId());
 	}
 
 	
